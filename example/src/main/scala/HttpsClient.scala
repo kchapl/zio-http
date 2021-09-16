@@ -28,7 +28,7 @@ object HttpsClient extends App {
 
   val program = for {
     res <- Client.request(url, headers, sslOption)
-    _   <- console.putStrLn {
+    _   <- Console.printLine {
       res.content match {
         case HttpData.CompleteData(data) => data.map(_.toChar).mkString
         case HttpData.StreamData(_)      => "<Chunked>"

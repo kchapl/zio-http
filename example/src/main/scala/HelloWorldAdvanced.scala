@@ -15,8 +15,8 @@ object HelloWorldAdvanced extends App {
   }
 
   private val app = HttpApp.collectM {
-    case Method.GET -> !! / "random" => random.nextString(10).map(Response.text)
-    case Method.GET -> !! / "utc"    => clock.currentDateTime.map(s => Response.text(s.toString))
+    case Method.GET -> !! / "random" => Random.nextString(10).map(Response.text)
+    case Method.GET -> !! / "utc"    => Clock.currentDateTime.map(s => Response.text(s.toString))
   }
 
   private val server =
@@ -32,7 +32,7 @@ object HelloWorldAdvanced extends App {
     server.make
       .use(_ =>
         // Waiting for the server to start
-        console.putStrLn(s"Server started on port $PORT")
+        Console.printLine(s"Server started on port $PORT")
 
         // Ensures the server doesn't die after printing
           *> ZIO.never,

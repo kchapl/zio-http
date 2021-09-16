@@ -9,7 +9,7 @@ object SimpleClient extends App {
 
   val program = for {
     res <- Client.request(url, headers)
-    _   <- console.putStrLn {
+    _   <- Console.printLine {
       res.content match {
         case HttpData.CompleteData(data) => data.map(_.toChar).mkString
         case HttpData.StreamData(_)      => "<Chunked>"
